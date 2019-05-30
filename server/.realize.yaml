@@ -1,0 +1,25 @@
+settings:
+  legacy:
+    force: false
+    interval: 0s
+schema:
+  - name: go-server
+    path: .
+    commands:
+      fmt:
+        status: true
+      install:
+        status: true
+        dir: .
+      run:
+        status: true
+        method: /go/bin/server
+    watcher:
+      extensions:
+      - go
+      paths:
+      - /
+      ignored_paths:
+      - .git
+      - .realize
+      - vendor
