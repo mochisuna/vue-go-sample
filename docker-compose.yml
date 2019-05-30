@@ -1,0 +1,46 @@
+version: '3.5'
+services:
+  vue-app:
+    stdin_open: true
+    tty: true
+    build:
+      context: .
+      target: build-vue
+      dockerfile: app/Dockerfile
+    volumes:
+      - ./app/:/app
+    command: yarn run serve
+    ports:
+      - 39000:8080
+    depends_on:
+      - go-app
+
+  go-app:
+    build:
+      context: .
+      target: build-go
+      dockerfile: server/Dockerfile
+    volumes:
+      - ./server/:/go/server
+    command: realize start --run --no-config
+    ports:
+      - 38080:8080
+
+  # check production image
+  # vue-check:
+  #   build:
+  #     context: .
+  #     target: production-vue
+  #     dockerfile: app/Dockerfile
+  #   ports:
+  #     - 49000:80
+  #   depends_on:
+  #     - go-check
+
+  # go-check:
+  #   build:
+  #     context: .
+  #     target: production-go
+  #     dockerfile: server/Dockerfile
+  #   ports:
+  #     - 48080:8080
