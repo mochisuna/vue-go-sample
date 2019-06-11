@@ -48,7 +48,7 @@ func main() {
 
 		rendering.JSON(w, http.StatusOK, mons)
 	})
-	log.Println("Start Server!")
+	log.Println("Start Server")
 	if err := http.ListenAndServe(":8080", nil); err != nil {
 		log.Printf("Failed ListenAndServe. err: %v", err)
 		os.Exit(1)

@@ -16,4 +16,5 @@ COPY --from=build-go /go/server/list.json .
 RUN addgroup go \
   && adduser -D -G go go \
   && chown -R go:go /app/server
+EXPOSE 8080
 CMD ["./server"]
