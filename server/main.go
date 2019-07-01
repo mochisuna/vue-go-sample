@@ -21,9 +21,8 @@ type Monster struct {
 	HP   MonsterHP   `json:"hp"`
 }
 
-var rendering = render.New(render.Options{})
-
 func main() {
+	rendering := render.New(render.Options{})
 	raw, err := ioutil.ReadFile("./list.json")
 	if err != nil {
 		log.Printf("Failed ReadFile. err: %v", err)
