@@ -4,11 +4,8 @@ services:
     stdin_open: true
     tty: true
     build:
-      context: .
+      context: ./app
       target: build-vue
-      dockerfile: app/Dockerfile
-    volumes:
-      - ./app/:/app
     command: yarn run serve
     ports:
       - 39000:8080
@@ -17,11 +14,8 @@ services:
 
   go-app:
     build:
-      context: .
+      context: ./server
       target: build-go
-      dockerfile: server/Dockerfile
-    volumes:
-      - ./server/:/go/server
     command: realize start --run --no-config
     ports:
       - 38080:8080
