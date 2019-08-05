@@ -2,7 +2,8 @@
   <div class="monster">
     <h1>{{ msg }}</h1>
     <h2>名前</h2>
-    <input v-model="monster_name">
+    <h3>攻撃力: {{attack}}</h3>
+    <input v-model="monster_name" />
     <button v-on:click="doAdd">モンスターを追加</button>
     <ul>
       <li
@@ -17,16 +18,15 @@
             dying
           >瀕死！</span>
           <button v-on:click="doAttack(index)">攻撃する</button>
-          <button v-on:click="doRemove(index,item.id)">削除</button>
+          <button v-on:click="doRemove(index)">削除</button>
         </div>
       </li>
     </ul>
   </div>
 </template>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
-
 <script>
+import axios from "axios";
 export default {
   name: "Monster",
   props: {
@@ -49,8 +49,8 @@ export default {
       }, 0);
       // 新しいモンスターをリストに追加
       if (this.monster_name) {
-        var max = Math.floor(Math.random() * Math.floor(500));
-        var hp = Math.floor(Math.random() * Math.floor(max));
+        var max = Math.floor(Math.random() * Math.floor(500)) + 1;
+        var hp = Math.floor(Math.random() * Math.floor(max)) + 1;
         this.monster_list.push({
           id: last + 1, // 現在の最大のIDに+1してユニークなIDを作成
           name: this.monster_name, // 現在のフォームの入力値
@@ -60,23 +60,21 @@ export default {
         });
       }
     },
-    doRemove: function(index, id) {
+    doRemove: function(index) {
       // 受け取ったインデックスの位置から1個要素を削除
-      console.log("remove");
       this.monster_list.splice(index, 1);
     },
     doAttack: function(index) {
-      console.log("hit");
       this.monster_list[index].hp -= this.attack; // HPを減らす
-      if (this.monster_list[index].hp < 0) {
+      if (this.monster_list[index].hp <= 0) {
+        console.log("Lv up!!!");
         this.monster_list[index].dead = true;
         this.attack++;
       }
     }
   },
   created: function() {
-    console.log("axios");
-    this.$axios
+    axios
       .get(process.env.VUE_APP_API_ORIGIN)
       .then(
         function(response) {

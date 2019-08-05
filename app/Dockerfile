@@ -1,5 +1,5 @@
-# --- local ---
 # vue
+# --- local ---
 FROM node:8.15.0-alpine as build-vue
 WORKDIR /app
 COPY . .
@@ -10,8 +10,8 @@ RUN apk update && \
   yarn run build
 
 # --- production ---
-# vue
 FROM nginx:1.15.12-alpine as production-vue
 COPY --from=build-vue /app/dist /usr/share/nginx/html
-EXPOSE 80
+COPY --from=build-vue /app/nginx/default.conf /etc/nginx/conf.d/default.conf
+EXPOSE 8080
 CMD ["nginx", "-g", "daemon off;"]

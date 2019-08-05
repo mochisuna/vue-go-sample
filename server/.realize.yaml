@@ -17,6 +17,7 @@ schema:
     watcher:
       extensions:
       - go
+      - json
       paths:
       - /
       ignored_paths:

@@ -1,5 +1,5 @@
-# --- local ---
 # go
+# --- local ---
 FROM golang:1.12-alpine as build-go
 WORKDIR /go/server
 COPY . .
@@ -8,7 +8,6 @@ RUN apk add --no-cache git make  && \
   make build
 
 # --- production ---
-# go
 FROM alpine as production-go
 WORKDIR /app
 COPY --from=build-go /go/server/bin/server .
