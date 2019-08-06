@@ -15,6 +15,11 @@ dstop:
 	@echo "docker stop"
 	@docker-compose stop
 
+# restart container
+drestart:
+	@make dstop
+	@make dstart
+
 # show container's status
 dstatus:
 	@echo "docker status"
