@@ -12,7 +12,7 @@ NODE_ENV = <YOUE ENVIRONMENT>
 VUE_APP_API_ORIGIN = <URI>
 ```
 
-These configuration file must follow the `.env.<environment name>` format.  
+These configuration file must follow the `.env.<environment name>` format (Note: in production environment, you must create a `.env` file).  
 For example, if you want to run in `local` environment.  
 You have to create `.env.local` file like this.
 
