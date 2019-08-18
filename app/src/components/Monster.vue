@@ -26,7 +26,6 @@
 </template>
 
 <script>
-import axios from "axios";
 export default {
   name: "Monster",
   props: {
@@ -74,7 +73,7 @@ export default {
     }
   },
   created: function() {
-    axios
+    this.axios
       .get(process.env.VUE_APP_API_ORIGIN)
       .then(
         function(response) {
