@@ -16,6 +16,8 @@ These configuration file must follow the `.env.<environment name>` format.
 For example, if you want to run in `local` environment.  
 You have to create `.env.local` file like this.
 
+Note: In production environment, You have to create `.env` file.
+
 ```.env.local
 NODE_ENV='local'
 VUE_APP_API_ORIGIN='http://localhost:38080/monsters'
