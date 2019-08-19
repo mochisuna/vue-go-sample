@@ -1,6 +1,6 @@
 # vue
 # --- local ---
-FROM node:8.15.0-alpine as build-vue
+FROM node:12.8.1-alpine as build-vue
 WORKDIR /app
 COPY . .
 RUN apk update && \
