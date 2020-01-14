@@ -20,5 +20,5 @@ Note: In production environment, You have to create `.env` file.
 
 ```.env.local
 NODE_ENV='local'
-VUE_APP_API_ORIGIN='http://localhost:38080/monsters'
+VUE_APP_API_ORIGIN='http://localhost:39000/monsters'
 ```
