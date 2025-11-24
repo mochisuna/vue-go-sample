@@ -1,16 +1,14 @@
 # vue
 # --- local ---
-FROM node:12.8.1-alpine as build-vue
+FROM node:20-alpine as build-vue
 WORKDIR /app
 COPY . .
-RUN apk update && \
-  npm install -g npm && \
-  npm install -g yarn && \
+RUN corepack enable && \
   yarn install && \
-  yarn run build
+  NODE_OPTIONS=--openssl-legacy-provider yarn run build
 
 # --- production ---
-FROM nginx:1.15.12-alpine as production-vue
+FROM nginx:alpine as production-vue
 COPY --from=build-vue /app/dist /usr/share/nginx/html
 COPY --from=build-vue /app/nginx/default.conf /etc/nginx/conf.d/default.conf
 EXPOSE 8080

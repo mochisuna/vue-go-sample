@@ -23,6 +23,10 @@ run: setup
 	@echo "go run"
 	@go run ./main.go
 
+dev:
+	@echo "Start with hot reload (air)"
+	@air
+
 ## Install package
 .PHONY: golint
 golint:

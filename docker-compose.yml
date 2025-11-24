@@ -1,4 +1,3 @@
-version: '3.5'
 services:
   vue-app:
     stdin_open: true
@@ -6,7 +5,9 @@ services:
     build:
       context: ./app
       target: build-vue
-    command: yarn run serve
+    command: sh -c "corepack enable && yarn install && NODE_OPTIONS=--openssl-legacy-provider yarn run serve"
+    environment:
+      - NODE_OPTIONS=--openssl-legacy-provider
     volumes:
       - ./app:/app
     ports:
@@ -18,7 +19,7 @@ services:
     build:
       context: ./server
       target: build-go
-    command: realize start --run
+    command: make dev
     volumes:
       - ./server:/go/server
     ports:

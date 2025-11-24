@@ -1,10 +1,10 @@
 # go
 # --- local ---
-FROM golang:1.12-alpine as build-go
+FROM golang:1.25-alpine as build-go
 WORKDIR /go/server
 COPY . .
-RUN apk add --no-cache git make  && \
-  go get github.com/oxequa/realize && \
+RUN apk add --no-cache git make && \
+  go install github.com/air-verse/air@latest && \
   make build
 
 # --- production ---
